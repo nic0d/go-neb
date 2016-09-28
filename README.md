@@ -23,6 +23,19 @@ Go-NEB is a [Matrix](https://matrix.org) bot written in Go. It is the successor 
 
 # Quick Start
 
+## Using Docker
+
+* Requires Docker
+
+Quick launch (no persitent data):
+
+```
+$docker run -it -e PUBLIC_FACING_HOST_URL='http://0.0.0.0' -p 4050:4050 --rm nic0d/go-neb
+INFO[0000] Go-NEB (BIND_ADDRESS=:4050 DATABASE_TYPE=sqlite3 DATABASE_URL=go-neb.db BASE_URL=http://0.0.0.0 LOG_DIR=)
+```
+
+## Without Docker
+
 Clone and run (Requires Go 1.5+ and GB):
 
 ```bash
@@ -144,7 +157,7 @@ Every service MUST have the following fields:
  - `Id` : An arbitrary string which you can use to identify this service.
  - `UserID` : A user ID of a client which has been previously configured on Go-NEB. If this user does not exist, an error will be returned.
  - `Config` : A JSON object. The contents of this object depends on the service.
- 
+
 The information about a Service can be retrieved based on their `Id` like so:
 ```bash
 curl -X POST localhost:4050/admin/getService --data-binary '{
@@ -211,7 +224,7 @@ curl -X POST localhost:4050/admin/configureService --data-binary '{
 }'
 ```
  - `RealmID`: The ID of the Github Realm you created earlier.
- 
+
 You can set a "default repository" for a Matrix room by sending a `m.room.bot.options` state event which has the following `content`:
 ```json
 {
@@ -373,7 +386,7 @@ curl -X POST localhost:4050/admin/removeAuthSession --data-binary '{
     "Config": {}
 }'
 ```
- 
+
 ### JIRA Realm
 This has the `Type` of `jira`. To set up this realm:
 ```bash
@@ -437,7 +450,7 @@ You can then install the pre-commit hook:
 ./hooks/install.sh
 ```
 
-    
+
 ## Architecture
 
 ```
@@ -459,8 +472,8 @@ You can then install the pre-commit hook:
       |                   |                   
     WEBHOOK            REDIRECT
     REQUEST            REQUEST
-    
-    
+
+
 Clients      = A thing which can talk to homeservers and listen for events. /configureClient makes these.
 Service      = An individual bot, configured by a user. /configureService makes these.
 Auth Realm   = A place where a user can authenticate with. /configureAuthRealm makes these.
