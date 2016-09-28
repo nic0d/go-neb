@@ -9,4 +9,5 @@ COPY . /app
 
 WORKDIR /app 
 RUN gb build github.com/matrix-org/go-neb
-CMD BIND_ADDRESS=:4050 DATABASE_TYPE=sqlite3 DATABASE_URL=go-neb.db BASE_URL=$PUBLIC_FACING_HOST_URL bin/go-neb
+CMD GOPATH=$GOPATH:$(pwd) godoc -v -http=0.0.0.0:6060 & \
+	 BIND_ADDRESS=:4050 DATABASE_TYPE=sqlite3 DATABASE_URL=go-neb.db BASE_URL=$PUBLIC_FACING_HOST_URL bin/go-neb

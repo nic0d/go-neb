@@ -4,6 +4,7 @@ Go-NEB is a [Matrix](https://matrix.org) bot written in Go. It is the successor 
 
 # Table of Contents
  * [Quick Start](#quick-start)
+    * [Using Docker](#using-docker)
     * [Features](#features)
  * [Installing](#installing)
  * [Running](#running)
@@ -27,12 +28,21 @@ Go-NEB is a [Matrix](https://matrix.org) bot written in Go. It is the successor 
 
 * Requires Docker
 
-Quick launch (no persitent data):
+### Quick launch (no persitent data):
 
 ```
 $docker run -it -e PUBLIC_FACING_HOST_URL='http://0.0.0.0' -p 4050:4050 --rm nic0d/go-neb
 INFO[0000] Go-NEB (BIND_ADDRESS=:4050 DATABASE_TYPE=sqlite3 DATABASE_URL=go-neb.db BASE_URL=http://0.0.0.0 LOG_DIR=)
 ```
+
+### Quick launch with documentation server (no persitent data):
+
+```
+$docker run -it -e PUBLIC_FACING_HOST_URL='http://0.0.0.0' -p 4050:4050 -p 6060:6060--rm nic0d/go-neb:with-doc
+```
+
+NB: Some errors are displayed at launch but a documentation should be available at http://0.0.0.0:6060
+
 
 ## Without Docker
 
